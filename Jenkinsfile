@@ -1,5 +1,6 @@
 pipeline {
-    agent any
+    agent { 'k8s-agent'
+        }
 
     stages {
         stage('Build') {
