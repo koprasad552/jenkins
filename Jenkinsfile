@@ -9,9 +9,9 @@ pipeline {
         container('maven') {
             stage('Build a Maven project') {
                 sh 'mvn -B -ntp clean install'
+                 }
             }
         }
-    }
         stage('Get a Golang project') {
         git url: 'https://github.com/hashicorp/terraform-provider-google.git', branch: 'main'
         container('golang') {
@@ -21,8 +21,8 @@ pipeline {
                 ln -s `pwd` /go/src/github.com/hashicorp/terraform
                 cd /go/src/github.com/hashicorp/terraform && make
             '''
+                }
             }
-          }
         }
     }
 }
