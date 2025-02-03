@@ -1,5 +1,6 @@
 pipeline {
-    agent { 'k8s-agent'
+    agent { 
+        label 'k8s-agent'
         }
 
     stages {
