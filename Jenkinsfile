@@ -4,14 +4,6 @@ pipeline {
     }
 
     stages {
-        stage('Get a Maven project') {
-            steps {
-                git 'https://github.com/jenkinsci/kubernetes-plugin.git'
-                container('maven') {
-                    sh 'mvn -B -ntp clean install'
-                }
-            }
-        }
         stage('Get a Golang project') {
             steps {
                 git(url: 'https://github.com/hashicorp/terraform-provider-google.git', branch: 'main')
@@ -21,6 +13,14 @@ pipeline {
                         ln -s `pwd` /go/src/github.com/hashicorp/terraform
                         cd /go/src/github.com/hashicorp/terraform && make
                     '''
+                }
+            }
+        }
+        stage('Get a Maven project') {
+            steps {
+                git 'https://github.com/jenkinsci/kubernetes-plugin.git'
+                container('maven') {
+                    sh 'mvn -B -ntp clean install'
                 }
             }
         }
